@@ -1,14 +1,25 @@
+// Import inquirer, express and mysql2
 const inquirer = require('inquirer');
 const express = require('express');
-// Import and require mysql2
 const mysql = require('mysql2');
 
+// Create Port with ability to send to Heroku
 const PORT = process.env.PORT || 3001;
 const app = express();
 
 // Express middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+const db = mysql.createConnection(
+  {
+      host: 'localhost',
+      user: 'root',
+      password: 'C00rs!srael22',
+      database: 'employee_tracker_db'
+  },
+  console.log(`You are now connected to the employees_db!`)
+);
 
 function showTable() {
   
