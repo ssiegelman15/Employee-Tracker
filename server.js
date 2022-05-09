@@ -11,12 +11,13 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+// Create connection to dataabse using personal log-in info
 const db = mysql.createConnection(
   {
       host: 'localhost',
       user: 'root',
       password: 'C00rs!srael22',
-      database: 'employee_tracker_db'
+      database: 'employee_db'
   },
   console.log(`You are now connected to the employees_db!`)
 );
