@@ -1,4 +1,4 @@
-const prompts = [
+const initialPrompt = [
   {
     type: "list",
     message: "Please choose what you would like to do:",
@@ -6,3 +6,5 @@ const prompts = [
     name: "nextAction",
   }
 ];
+
+module.exports = Questions;
