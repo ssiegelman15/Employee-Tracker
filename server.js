@@ -2,6 +2,7 @@
 const inquirer = require('inquirer');
 const express = require('express');
 const mysql = require('mysql2');
+const { initialPrompt } = require('./helpers/questions')
 
 // Create Port with ability to send to Heroku
 const PORT = process.env.PORT || 3001;
@@ -22,16 +23,37 @@ const db = mysql.createConnection(
   console.log(`You are now connected to the employees_db!`)
 );
 
-function showTable() {
-  
-}
-
 // Function to initialize app
 function init() {
   inquirer
-    .prompt(chooseView)
+    .prompt(initialPrompt)
     .then((response => {
-      showTable(response);
+      switch(response.initial) {
+        case 'View All Employees':
+          viewEmployees();
+          break;
+        case 'Add Employee':
+          addEmployee();
+          break;
+        case 'Update Employee Roles':
+          updateRoles();
+          break;
+        case 'View All Roles':
+          viewRoles();
+          break;
+        case 'Add Role':
+          addRole();
+          break;
+        case 'View All Departments':
+          viewDepartments();
+          break;
+        case 'Add Department':
+          addDepartment();
+          break;
+        case 'Exit':
+          exitApp();
+          break;
+      }
     }));
 }
 
