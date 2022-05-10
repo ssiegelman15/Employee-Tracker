@@ -4,6 +4,11 @@ const express = require('express');
 const mysql = require('mysql2');
 const { initialPrompt } = require('./helpers/questions')
 
+// Initialize arrays of employees, departments, and roles to be filled form database
+const allEmployees = [];
+const allDepartments = [];
+const allRoles = [];
+
 // Create Port with ability to send to Heroku
 const PORT = process.env.PORT || 3001;
 const app = express();
