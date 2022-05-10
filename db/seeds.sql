@@ -20,7 +20,7 @@ VALUES ("Project Engineer", 1, 100000),
        ("Machine Operator", 5, 68000),
        ("Reliability Engineer", 1, 90000);
 
-INSERT INTO employee (firstName, lastName, roleId)
+INSERT INTO employees (firstName, lastName, roleId)
 VALUES  ("Thomas", "Le", 1),
         ("Lauren", "Kelso", 2),
         ("Jennifer", "Wilkerson", 3),
