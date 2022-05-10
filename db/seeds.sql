@@ -1,6 +1,6 @@
 USE employees_db;
 
-INSERT INTO departments (department_name)
+INSERT INTO departments (departmentName)
 VALUES ("Engineering"),
        ("Accounting"),
        ("Maintenance"),
@@ -20,3 +20,15 @@ VALUES ("Project Engineer", 1, 100000),
        ("Machine Operator", 5, 68000),
        ("Reliability Engineer", 1, 90000);
 
+INSERT INTO employee (firstName, lastName, roleId)
+VALUES  ("Thomas", "Le", 1),
+        ("Lauren", "Kelso", 2),
+        ("Jennifer", "Wilkerson", 3),
+        ("Laura", "Newsom", 4),
+        ("Don", "Harberts", 5),
+        ("Joseph", "Trujillo", 6),
+        ("Jeremey", "Heronomus", 7),
+        ("Timothy", "Crocket", 8),
+        ("Barry", "Kapius", 9),
+        ("Adam", "Gonzalez", 10),
+        ("Samuel", "Wasserman", 11),
