@@ -2,7 +2,7 @@
 const inquirer = require('inquirer');
 const express = require('express');
 const mysql = require('mysql2');
-const { initialPrompt, addDepartment, addRole, addEmployee, updateRole } = require('./helpers/questions')
+const { initialPrompt, addDepartmentPrompt, addRolePrompt, addEmployeePrompt, updateRolePrompt } = require('./helpers/questions')
 
 // Initialize arrays of employees, departments, and roles to be filled form database
 const allEmployees = [];

@@ -7,7 +7,7 @@ const initialPrompt = [
   }
 ];
 
-const addDepartment = [
+const addDepartmentPrompt = [
   {
     type: "input",
     message: "What is the name of the department that you would like to add?",
@@ -15,7 +15,7 @@ const addDepartment = [
   }
 ];
 
-const addRole = [
+const addRolePrompt = [
   {
     type: "input",
     message: "What is the name of the role that you would like to add?",
@@ -34,7 +34,7 @@ const addRole = [
   }
 ];
 
-const addEmployee = [
+const addEmployeePrompt = [
   {
     type: "input",
     message: "What is the new employee's first name?",
@@ -59,7 +59,7 @@ const addEmployee = [
   }
 ];
 
-const updateRole = [
+const updateRolePrompt = [
   {
     type: "list",
     message: "Which employee's role would you like to update?",
@@ -74,4 +74,4 @@ const updateRole = [
   }
 ]
 
-module.exports = {initialPrompt, addDepartment, addRole, addEmployee, updateRole};
+module.exports = {initialPrompt, addDepartmentPrompt, addRolePrompt, addEmployeePrompt, updateRolePrompt};
