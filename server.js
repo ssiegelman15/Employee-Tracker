@@ -11,7 +11,7 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-// Create connection to dataabse using personal log-in info
+// Create connection to database using personal log-in info
 const db = mysql.createConnection(
   {
       host: 'localhost',
