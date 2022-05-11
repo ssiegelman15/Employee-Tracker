@@ -31,4 +31,4 @@ VALUES  ("Thomas", "Le", 1, NULL),
         ("Timothy", "Crocket", 8, 5),
         ("Barry", "Kapius", 9, 8),
         ("Adam", "Gonzalez", 10, 7),
-        ("Samuel", "Wasserman", 11, 5),
+        ("Samuel", "Wasserman", 11, 5);

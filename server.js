@@ -1,7 +1,6 @@
-// Import inquirer, express and mysql2
+// Import inquirer and mysql2
 const inquirer = require('inquirer');
-const express = require('express');
-const mysql = require('mysql2');
+const mysql = require('mysql');
 const { initialPrompt, addDepartmentPrompt, addRolePrompt, addEmployeePrompt, updateRolePrompt } = require('./helpers/questions')
 
 // Initialize arrays of employees, departments, and roles to be filled form database
@@ -9,21 +8,13 @@ const allEmployees = [];
 const allDepartments = [];
 const allRoles = [];
 
-// Create Port with ability to send to Heroku
-const PORT = process.env.PORT || 3001;
-const app = express();
-
-// Express middleware
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
-
 // Create connection to database using personal log-in info
 const db = mysql.createConnection(
   {
-      host: 'localhost',
-      user: 'root',
-      password: 'C00rs!srael22',
-      database: 'employee_db'
+    host: 'localhost',
+    user: 'root',
+    password: "C00rs!srael22",
+    database: 'employees_db'
   },
   console.log(`You are now connected to the employees_db!`)
 );
@@ -33,7 +24,8 @@ function init() {
   inquirer
     .prompt(initialPrompt)
     .then((response => {
-      switch(response.initial) {
+      console.log(response);
+      switch (response) {
         case 'View All Employees':
           viewEmployees();
           break;
@@ -58,6 +50,8 @@ function init() {
         case 'Exit':
           exitApp();
           break;
+        default:
+          console.log("here's the test");
       }
     }));
 }
