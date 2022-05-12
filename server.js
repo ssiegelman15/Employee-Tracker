@@ -21,12 +21,12 @@ const db = mysql.createConnection(
 );
 
 const viewEmployees = () => db.query(`
-SELECT employees.id AS id, 
-CONCAT(employees.firstName, ' ', employees.lastName) AS name,
-CONCAT(manager.firstName,' ', manager.lastName) AS manager, 
-roles.title AS title, 
-roles.salary AS salary, 
-departments.departmentName AS department
+SELECT employees.id AS ID, 
+CONCAT(employees.firstName, ' ', employees.lastName) AS Name,
+CONCAT(manager.firstName,' ', manager.lastName) AS Manager, 
+roles.title AS Title, 
+roles.salary AS Salary, 
+departments.departmentName AS Department
 FROM employees
 JOIN roles ON employees.roleId = roles.id 
 LEFT JOIN employees manager ON manager.id = employees.managerId
@@ -41,13 +41,25 @@ ORDER BY employees.id;`, (err, results) => {
 });
 
 const viewRoles = () => db.query(`
-SELECT roles.id AS id, 
-roles.title AS title, 
-roles.salary AS salary,
-departments.departmentName AS department
+SELECT roles.id AS ID, 
+roles.title AS Title, 
+roles.salary AS Salary,
+departments.departmentName AS Department
 FROM roles
 JOIN departments ON roles.departmentId = departments.id 
 ORDER BY roles.id;`, (err, results) => {
+  if (err) {
+    console.error(err)
+  } else {
+    console.table('\x1B[36m', results)
+  }
+  init();
+});
+
+const viewDepartments = () => db.query(`
+SELECT departments.id AS ID, 
+departments.departmentName AS Department
+FROM departments;`, (err, results) => {
   if (err) {
     console.error(err)
   } else {
@@ -64,6 +76,7 @@ function init() {
     .then((response => {
       switch (response.prompt) {
         case 'View All Employees':
+          // function done
           viewEmployees();
           break;
         case 'Add Employee':
@@ -73,6 +86,7 @@ function init() {
           updateRoles();
           break;
         case 'View All Roles':
+          // function done
           viewRoles();
           break;
         case 'Add Role':
