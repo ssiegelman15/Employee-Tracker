@@ -48,7 +48,3 @@ WHERE roleId IN (8, 9, 11);
 UPDATE employees
 SET managerId = 7
 WHERE roleId IN (10);
-
-UPDATE employees
-SET managerId = NULL
-WHERE roleId IN (1, 4, 5, 6, 7);
