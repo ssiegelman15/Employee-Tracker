@@ -40,6 +40,22 @@ ORDER BY employees.id;`, (err, results) => {
   init();
 });
 
+const viewRoles = () => db.query(`
+SELECT roles.id AS id, 
+roles.title AS title, 
+roles.salary AS salary,
+departments.departmentName AS department
+FROM roles
+JOIN departments ON roles.departmentId = departments.id 
+ORDER BY roles.id;`, (err, results) => {
+  if (err) {
+    console.error(err)
+  } else {
+    console.table('\x1B[36m', results)
+  }
+  init();
+});
+
 
 // Function to initialize app
 function init() {
