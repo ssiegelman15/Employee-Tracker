@@ -19,13 +19,35 @@ const db = mysql.createConnection(
   console.log(`You are now connected to the employees_db!`)
 );
 
+const viewEmployees = () => db.query(`
+SELECT employees.id AS id, 
+employees.firstName AS first_name, 
+employees.lAStName AS lASt_name,
+manager.firstName AS manager_first_name, 
+manager.lAStName AS manager_lASt_name, 
+roles.title AS title, 
+roles.salary AS salary, 
+departments.departmentName AS department_name 
+FROM employees
+JOIN roles ON employees.roleId = roles.id 
+JOIN employees manager ON manager.id = employees.managerId
+JOIN departments ON roles.departmentId = departments.id 
+ORDER BY employees.id;`, (err, results) => {
+        if (err) {
+            console.error(err)
+        } else {
+            console.log(results)
+        }
+        init();
+    });
+
+
 // Function to initialize app
 function init() {
   inquirer
     .prompt(initialPrompt)
     .then((response => {
-      console.log(response);
-      switch (response) {
+      switch (response.prompt) {
         case 'View All Employees':
           viewEmployees();
           break;
@@ -50,8 +72,6 @@ function init() {
         case 'Exit':
           exitApp();
           break;
-        default:
-          console.log("here's the test");
       }
     }));
 }

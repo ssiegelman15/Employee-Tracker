@@ -21,14 +21,30 @@ VALUES  ("Project Engineer", 1, 100000),
         ("Reliability Engineer", 3, 90000);
 
 INSERT INTO employees (firstName, lastName, roleId)
-VALUES  ("Thomas", "Le", 1, NULL),
-        ("Lauren", "Kelso", 2, 1),
-        ("Jennifer", "Wilkerson", 3, 6),
-        ("Laura", "Newsom", 4, NULL),
-        ("Don", "Harberts", 5, NULL),
-        ("Joseph", "Trujillo", 6, NULL),
-        ("Jeremey", "Heronomus", 7, NULL),
-        ("Timothy", "Crocket", 8, 5),
-        ("Barry", "Kapius", 9, 8),
-        ("Adam", "Gonzalez", 10, 7),
-        ("Samuel", "Wasserman", 11, 5);
+VALUES  ("Thomas", "Le", 1),
+        ("Lauren", "Kelso", 2),
+        ("Jennifer", "Wilkerson", 3),
+        ("Laura", "Newsom", 4),
+        ("Don", "Harberts", 5),
+        ("Joseph", "Trujillo", 6),
+        ("Jeremey", "Heronomus", 7),
+        ("Timothy", "Crocket", 8),
+        ("Barry", "Kapius", 9),
+        ("Adam", "Gonzalez", 10),
+        ("Samuel", "Wasserman", 11);
+
+UPDATE employees
+SET managerId = 1
+WHERE roleId IN (2);
+
+UPDATE employees
+SET managerId = 6
+WHERE roleId IN (3);
+
+UPDATE employees
+SET managerId = 5
+WHERE roleId IN (8, 9, 11);
+
+UPDATE employees
+SET managerId = 7
+WHERE roleId IN (10);
