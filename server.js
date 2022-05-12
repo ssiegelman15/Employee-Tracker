@@ -29,7 +29,7 @@ roles.salary AS salary,
 departments.departmentName AS department
 FROM employees
 JOIN roles ON employees.roleId = roles.id 
-JOIN employees manager ON manager.id = employees.managerId
+LEFT JOIN employees manager ON manager.id = employees.managerId
 JOIN departments ON roles.departmentId = departments.id 
 ORDER BY employees.id;`, (err, results) => {
   if (err) {
