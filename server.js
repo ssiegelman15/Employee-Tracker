@@ -1,6 +1,7 @@
 // Import inquirer and mysql2
 const inquirer = require('inquirer');
 const mysql = require('mysql');
+const consoleTable = require('console.table');
 const { initialPrompt, addDepartmentPrompt, addRolePrompt, addEmployeePrompt, updateRolePrompt } = require('./helpers/questions')
 
 // Initialize arrays of employees, departments, and roles to be filled form database
@@ -21,25 +22,23 @@ const db = mysql.createConnection(
 
 const viewEmployees = () => db.query(`
 SELECT employees.id AS id, 
-employees.firstName AS first_name, 
-employees.lAStName AS lASt_name,
-manager.firstName AS manager_first_name, 
-manager.lAStName AS manager_lASt_name, 
+CONCAT(employees.firstName, ' ', employees.lastName) AS name,
+CONCAT(manager.firstName,' ', manager.lastName) AS manager, 
 roles.title AS title, 
 roles.salary AS salary, 
-departments.departmentName AS department_name 
+departments.departmentName AS department
 FROM employees
 JOIN roles ON employees.roleId = roles.id 
 JOIN employees manager ON manager.id = employees.managerId
 JOIN departments ON roles.departmentId = departments.id 
 ORDER BY employees.id;`, (err, results) => {
-        if (err) {
-            console.error(err)
-        } else {
-            console.log(results)
-        }
-        init();
-    });
+  if (err) {
+    console.error(err)
+  } else {
+    console.table('\x1b[33m', results)
+  }
+  init();
+});
 
 
 // Function to initialize app
