@@ -2,12 +2,8 @@
 const inquirer = require('inquirer');
 const mysql = require('mysql');
 const consoleTable = require('console.table');
-const { initialPrompt, addDepartmentPrompt, addRolePrompt, addEmployeePrompt, updateRolePrompt } = require('./helpers/questions')
-
-// Initialize arrays of employees, departments, and roles to be filled form database
-const allEmployees = [];
-const allDepartments = [];
-const allRoles = [];
+const { initialPrompt, addDepartmentPrompt, addRolePrompt, addEmployeePrompt, updateRolePrompt } = require('./helpers/questions');
+const {allDepartments, allEmployees, allRoles} = require('./helpers/createArrays');
 
 // Create connection to database using personal log-in info
 const db = mysql.createConnection(
@@ -78,6 +74,9 @@ function init() {
   inquirer
     .prompt(initialPrompt)
     .then((response => {
+      console.log(allDepartments);
+      console.log(allEmployees);
+      console.log(allRoles);
       switch (response.prompt) {
         case 'View All Employees':
           // function done
@@ -104,6 +103,7 @@ function init() {
           addDepartment();
           break;
         case 'Exit':
+          // function done
           exitApp();
           break;
       }
