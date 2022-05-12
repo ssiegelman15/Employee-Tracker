@@ -68,6 +68,10 @@ FROM departments;`, (err, results) => {
   init();
 });
 
+const exitApp = () => {
+  console.log("Thanks for stopping by!");
+  db.end();
+}
 
 // Function to initialize app
 function init() {
