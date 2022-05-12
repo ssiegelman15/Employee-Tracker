@@ -35,7 +35,7 @@ ORDER BY employees.id;`, (err, results) => {
   if (err) {
     console.error(err)
   } else {
-    console.table('\x1b[33m', results)
+    console.table('\x1B[36m', results)
   }
   init();
 });
