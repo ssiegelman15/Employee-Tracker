@@ -89,9 +89,6 @@ function init() {
   inquirer
     .prompt(initialPrompt)
     .then((response => {
-      console.log(allDepartments);
-      console.log(allEmployees);
-      console.log(allRoles);
       switch (response.prompt) {
         case 'View All Employees':
           // function done
