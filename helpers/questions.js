@@ -13,7 +13,6 @@ const db = mysql.createConnection(
     password: "C00rs!srael22",
     database: 'employees_db'
   },
-  console.log(`You are now connected to the employees_db!`)
 );
 
 db.query(`SELECT * FROM departments`, (err, results) => {

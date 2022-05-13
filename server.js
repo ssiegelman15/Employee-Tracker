@@ -38,7 +38,7 @@ ORDER BY employees.id;`, (err, results) => {
 
 const viewRoles = () => db.query(`
 SELECT roles.id AS ID, 
-roles.title AS Title, 
+roles.title AS Job_Title, 
 roles.salary AS Salary,
 departments.departmentName AS Department
 FROM roles
@@ -108,7 +108,8 @@ const addRole = () => {
 const exitApp = () => {
   console.log("Thanks for stopping by!");
   db.end();
-}
+  process.exit();
+};
 
 // Function to initialize app
 function init() {
