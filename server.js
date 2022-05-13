@@ -3,7 +3,7 @@ const inquirer = require('inquirer');
 const mysql = require('mysql');
 const consoleTable = require('console.table');
 const { initialPrompt, addDepartmentPrompt, addRolePrompt, addEmployeePrompt, updateRolePrompt } = require('./helpers/questions');
-const { allDepartments, allEmployees, allRoles } = require('./helpers/createArrays');
+// const { allDepartments, allEmployees, allRoles } = require('./helpers/createArrays');
 
 // Create connection to database using personal log-in info
 const db = mysql.createConnection(
