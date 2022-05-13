@@ -64,6 +64,21 @@ FROM departments;`, (err, results) => {
   init();
 });
 
+const addDepartment = () => {
+  inquirer
+      .prompt(addDepartmentPrompt)
+      .then((response) => {
+          db.query(`INSERT INTO departments (departmentName) VALUES (?)`, response.addDepartment, (err, results) => {
+              if (err) {
+                  console.error(err)
+              } else {
+                  console.log('\x1b[36m Department has been added to the database!');
+              }
+              init();
+          })
+      })
+};
+
 const exitApp = () => {
   console.log("Thanks for stopping by!");
   db.end();
