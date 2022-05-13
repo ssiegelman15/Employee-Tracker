@@ -131,6 +131,7 @@ function init() {
           viewRoles();
           break;
         case 'Add Role':
+          // function done
           addRole();
           break;
         case 'View All Departments':
@@ -138,6 +139,7 @@ function init() {
           viewDepartments();
           break;
         case 'Add Department':
+          // function done
           addDepartment();
           break;
         case 'Exit':
