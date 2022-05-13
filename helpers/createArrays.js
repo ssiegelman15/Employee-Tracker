@@ -1,10 +1,5 @@
 const mysql = require('mysql');
 
-// Initialize arrays of employees, departments, and roles to be filled form database
-const allEmployees = [];
-const allDepartments = [];
-const allRoles = [];
-
 // Create connection to database using personal log-in info
 const db = mysql.createConnection(
   {
@@ -16,7 +11,7 @@ const db = mysql.createConnection(
   console.log(`You are now connected to the employees_db!`)
 );
 
-db.query(`SELECT * FROM departments`, (err, results) => {
+const viewAllDepartments = () => db.query(`SELECT * FROM departments`, (err, results) => {
   if (err) {
       console.error(err);
   }        
@@ -42,5 +37,10 @@ db.query(`SELECT * FROM employees`, (err, results) => {
       allEmployees.push(`${employee.firstName} ${employee.lastName}`);
   }
 });
+
+// Initialize arrays of employees, departments, and roles to be filled form database
+const allEmployees = [];
+const allDepartments = [viewAllDepartments()];
+const allRoles = [];
 
 module.exports = {allDepartments, allEmployees, allRoles};

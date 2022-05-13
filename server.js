@@ -3,7 +3,7 @@ const inquirer = require('inquirer');
 const mysql = require('mysql');
 const consoleTable = require('console.table');
 const { initialPrompt, addDepartmentPrompt, addRolePrompt, addEmployeePrompt, updateRolePrompt } = require('./helpers/questions');
-const {allDepartments, allEmployees, allRoles} = require('./helpers/createArrays');
+const { allDepartments, allEmployees, allRoles } = require('./helpers/createArrays');
 
 // Create connection to database using personal log-in info
 const db = mysql.createConnection(
@@ -66,17 +66,43 @@ FROM departments;`, (err, results) => {
 
 const addDepartment = () => {
   inquirer
-      .prompt(addDepartmentPrompt)
-      .then((response) => {
-          db.query(`INSERT INTO departments (departmentName) VALUES (?)`, response.addDepartment, (err, results) => {
-              if (err) {
-                  console.error(err)
-              } else {
-                  console.log('\x1b[36m Department has been added to the database!');
-              }
-              init();
-          })
+    .prompt(addDepartmentPrompt)
+    .then((response) => {
+      db.query(`INSERT INTO departments (departmentName) VALUES (?)`, response.addDepartment, (err, results) => {
+        if (err) {
+          console.error(err)
+        } else {
+          console.log('\x1b[36m Department has been added to the database!');
+        }
+        init();
       })
+    })
+};
+
+const addRole = () => {
+  inquirer
+    .prompt(addRolePrompt)
+    .then((response) => {
+      // Initialize department Id variable
+      let departmentId;
+      // Change department name response to department Id response since thats how roles are stored
+      db.query(`SELECT (id) FROM departments WHERE departmentName=(?)`, response.roleDepartment, (err, results) => {
+        if (err) {
+          console.error(err)
+        } else {
+          departmentId = results[0].id
+        }
+        // Using department Id and title/salary inputs, insert new role into table
+        db.query(`INSERT INTO roles (title, departmentId, salary) VALUES (?, ?, ?)`, [response.addRole, departmentId, response.roleSalary], (err, results) => {
+          if (err) {
+            console.error(err)
+          } else {
+            console.log('\x1b[36m Role successfully added!');
+          }
+        })
+      })
+      init();
+    })
 };
 
 const exitApp = () => {
