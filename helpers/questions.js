@@ -92,13 +92,13 @@ const addEmployeePrompt = [
   {
     type: "list",
     message: "What role will the new employee have?",
-    choices: ["NEED TO UPDATE THIS TO SHOW ALL ROLES", "AND HAVE IT ABLE TO READ THE UP TO DATE ROLES ARRAY"],    
+    choices: allRoles,    
     name: "employeeRole"
   },
   {
     type: "list",
     message: "Who will the new employee's manager be?",
-    choices: ["NEED TO UPDATE THIS TO SHOW ALL EMPLOYEES", "AND HAVE IT ABLE TO READ THE UP TO DATE EMPLOYEE ARRAY", "WITH NONE AS FIRST OPTION"],    
+    choices: allEmployees,    
     name: "employeeManager"
   }
 ];
@@ -107,13 +107,13 @@ const updateRolePrompt = [
   {
     type: "list",
     message: "Which employee's role would you like to update?",
-    choices: ["NEED TO UPDATE THIS TO SHOW ALL EMPLOYEES", "AND HAVE IT ABLE TO READ THE UP TO DATE EMPLOYEE ARRAY"],    
+    choices: allEmployees,    
     name: "employeeRoleUpdate"
   },
   {
     type: "list",
     message: "What role would you like to assign?",
-    choices: ["NEED TO UPDATE THIS TO SHOW ALL ROLES", "AND HAVE IT ABLE TO READ THE UP TO DATE ROLES ARRAY"],    
+    choices: allRoles,    
     name: "newRole"
   }
 ]
