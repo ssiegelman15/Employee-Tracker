@@ -49,7 +49,7 @@ const initialPrompt = [
   {
     type: "list",
     message: "Please choose what you would like to do:",
-    choices: ["View All Employees", "Add Employee", "Update Employee Roles", "View All Roles", "Add Role", "View All Departments", "Add Department", "Exit"],
+    choices: ["View All Employees", "Add Employee", "Delete Employee", "Update Employee Roles", "View All Roles", "Add Role", "View All Departments", "Add Department", "Exit"],
     name: "prompt"
   },
 ];
@@ -106,6 +106,15 @@ var addEmployeePrompt = [
   }
 ];
 
+var deleteEmployeePrompt = [
+  {
+    type: "list",
+    message: "Which employee would you like to remove from the database?",
+    choices: allEmployees,    
+    name: "employeeName"
+  }
+]
+
 var updateRolePrompt = [
   {
     type: "list",
@@ -121,4 +130,4 @@ var updateRolePrompt = [
   }
 ]
 
-module.exports = {populateEmployeeArray, populateRoleArray, populateDepartmentArray, initialPrompt, addDepartmentPrompt, addRolePrompt, addEmployeePrompt, updateRolePrompt};
+module.exports = {populateEmployeeArray, populateRoleArray, populateDepartmentArray, initialPrompt, addDepartmentPrompt, addRolePrompt, addEmployeePrompt, updateRolePrompt, deleteEmployeePrompt};

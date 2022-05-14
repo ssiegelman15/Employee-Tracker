@@ -2,7 +2,7 @@
 const inquirer = require('inquirer');
 const mysql = require('mysql');
 const consoleTable = require('console.table');
-const { populateEmployeeArray,populateRoleArray, populateDepartmentArray, initialPrompt, addDepartmentPrompt, addRolePrompt, addEmployeePrompt, updateRolePrompt } = require('./helpers/questions');
+const { populateEmployeeArray,populateRoleArray, populateDepartmentArray, deleteEmployeePrompt, initialPrompt, addDepartmentPrompt, addRolePrompt, addEmployeePrompt, updateRolePrompt } = require('./helpers/questions');
 // const { allDepartments, allEmployees, allRoles } = require('./helpers/createArrays');
 
 // Create connection to database using personal log-in info
@@ -177,6 +177,30 @@ const updateRoles = () => {
     })
 };
 
+
+const deleteEmployee = () => {
+  inquirer
+    .prompt(deleteEmployeePrompt)
+    .then((response) => {
+        let employeeName = response.employeeName.split(' ');
+        db.query(`SELECT (id) FROM employees WHERE firstName = "${employeeName[0]}" AND lastName = "${employeeName[1]}"`, employeeName, (err, results) => {
+          if (err) {
+            console.error(err);
+          } else {
+            employeeId = results[0].id;
+          }
+          db.query(`DELETE FROM employees WHERE id = ${employeeId}`, (err, results) => {
+            if (err) {
+              console.error(err)
+            } else {
+              console.log('\x1b[36m Employee successfully deleted from the database!');
+            }
+          })
+        })
+      init();
+    })
+};
+
 const exitApp = () => {
   console.log("Thanks for stopping by!");
   db.end();
@@ -193,24 +217,24 @@ function init() {
     .then((response => {
       switch (response.prompt) {
         case 'View All Employees':
-          populateEmployeeArray();
           viewEmployees();
           break;
         case 'Add Employee':
           addEmployee();
           break;
+        case 'Delete Employee':
+          deleteEmployee();
+          break;
         case 'Update Employee Roles':
           updateRoles();
           break;
         case 'View All Roles':
-          populateRoleArray();
           viewRoles();
           break;
         case 'Add Role':
           addRole();
           break;
         case 'View All Departments':
-          populateDepartmentArray();
           viewDepartments();
           break;
         case 'Add Department':
