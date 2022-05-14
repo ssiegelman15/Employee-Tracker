@@ -190,34 +190,27 @@ function init() {
     .then((response => {
       switch (response.prompt) {
         case 'View All Employees':
-          // function done
           viewEmployees();
           break;
         case 'Add Employee':
-          // function done
           addEmployee();
           break;
         case 'Update Employee Roles':
           updateRoles();
           break;
         case 'View All Roles':
-          // function done
           viewRoles();
           break;
         case 'Add Role':
-          // function done
           addRole();
           break;
         case 'View All Departments':
-          // function done
           viewDepartments();
           break;
         case 'Add Department':
-          // function done
           addDepartment();
           break;
         case 'Exit':
-          // function done
           exitApp();
           break;
       }
