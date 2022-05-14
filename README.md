@@ -4,6 +4,7 @@
 
   ## Table of Contents
 - [Description](#description)
+- [Website in Action](#usage)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
@@ -14,6 +15,10 @@
 ## Description
 
 Purpose of app is to provide business owners with the ability to view and manage the departments, roles, and employees in their company.
+
+## Website in Action
+
+
 
 ## Installation
 
