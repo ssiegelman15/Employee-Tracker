@@ -88,17 +88,53 @@ const addRole = () => {
       // Change department name response to department Id response since thats how roles are stored
       db.query(`SELECT (id) FROM departments WHERE departmentName=(?)`, response.roleDepartment, (err, results) => {
         if (err) {
-          console.error(err)
+          console.error(err);
         } else {
-          departmentId = results[0].id
+          departmentId = results[0].id;
         }
         // Using department Id and title/salary inputs, insert new role into table
         db.query(`INSERT INTO roles (title, departmentId, salary) VALUES (?, ?, ?)`, [response.addRole, departmentId, response.roleSalary], (err, results) => {
           if (err) {
-            console.error(err)
+            console.error(err);
           } else {
             console.log('\x1b[36m Role successfully added!');
           }
+        })
+      })
+      init();
+    })
+};
+
+const addEmployee = () => {
+  inquirer
+    .prompt(addEmployeePrompt)
+    .then((response) => {
+      // Initialize department Id variable
+      let roleId;
+      // Change department name response to department Id response since thats how roles are stored
+      db.query(`SELECT (id) FROM roles WHERE title=(?)`, response.employeeRole, (err, results) => {
+        if (err) {
+          console.error(err);
+        } else {
+          roleId = results[0].id;
+        }
+
+        let managerId;
+        let employeesManager = response.employeeManager.split(' ');
+        db.query(`SELECT (id) FROM employees WHERE firstName = "${employeesManager[0]}" AND lastName = "${employeesManager[1]}"`, employeesManager, (err, results) => {
+          if (err) {
+            console.error(err);
+          } else {
+            managerId = results[0].id;
+          }
+          // Using department Id and title/salary inputs, insert new role into table
+          db.query(`INSERT INTO employees (firstName, lastName, roleId, managerId) VALUES (?, ?, ?, ?)`, [response.firstName, response.lastName, roleId, managerId], (err, results) => {
+            if (err) {
+              console.error(err)
+            } else {
+              console.log('\x1b[36m Employee successfully added!');
+            }
+          })
         })
       })
       init();
