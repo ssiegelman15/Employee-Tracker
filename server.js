@@ -141,6 +141,42 @@ const addEmployee = () => {
     })
 };
 
+const updateRoles = () => {
+  inquirer
+    .prompt(updateRolePrompt)
+    .then((response) => {
+      // Initialize department Id variable
+      let roleId;
+      // Change department name response to department Id response since thats how roles are stored
+      db.query(`SELECT (id) FROM roles WHERE title=(?)`, response.newRole, (err, results) => {
+        if (err) {
+          console.error(err);
+        } else {
+          roleId = results[0].id;
+        }
+
+        let employeeId;
+        let employeeName = response.employeeRoleUpdate.split(' ');
+        db.query(`SELECT (id) FROM employees WHERE firstName = "${employeeName[0]}" AND lastName = "${employeeName[1]}"`, employeeName, (err, results) => {
+          if (err) {
+            console.error(err);
+          } else {
+            employeeId = results[0].id;
+          }
+          // Using department Id and title/salary inputs, insert new role into table
+          db.query(`UPDATE employees SET roleId = (?) WHERE id = ${employeeId}`, [roleId], (err, results) => {
+            if (err) {
+              console.error(err)
+            } else {
+              console.log('\x1b[36m Employee successfully added!');
+            }
+          })
+        })
+      })
+      init();
+    })
+};
+
 const exitApp = () => {
   console.log("Thanks for stopping by!");
   db.end();
@@ -158,6 +194,7 @@ function init() {
           viewEmployees();
           break;
         case 'Add Employee':
+          // function done
           addEmployee();
           break;
         case 'Update Employee Roles':
