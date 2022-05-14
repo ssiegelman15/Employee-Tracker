@@ -80,7 +80,6 @@ const addDepartment = () => {
 };
 
 const addRole = () => {
-  populateDepartmentArray();
   inquirer
     .prompt(addRolePrompt)
     .then((response) => {
@@ -107,8 +106,6 @@ const addRole = () => {
 };
 
 const addEmployee = () => {
-  populateEmployeeArray();
-  populateRoleArray();
   inquirer
     .prompt(addEmployeePrompt)
     .then((response) => {
@@ -145,8 +142,6 @@ const addEmployee = () => {
 };
 
 const updateRoles = () => {
-  populateEmployeeArray();
-  populateRoleArray();
   inquirer
     .prompt(updateRolePrompt)
     .then((response) => {
@@ -190,6 +185,9 @@ const exitApp = () => {
 
 // Function to initialize app
 function init() {
+  populateEmployeeArray();
+  populateRoleArray();
+  populateDepartmentArray();
   inquirer
     .prompt(initialPrompt)
     .then((response => {
