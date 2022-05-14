@@ -22,7 +22,7 @@ Purpose of app is to provide business owners with the ability to view and manage
 
 ## Installation
 
-npm i
+Run npm i in your terminal.
 
 ## Usage
 
