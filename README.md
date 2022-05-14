@@ -20,6 +20,13 @@ Purpose of app is to provide business owners with the ability to view and manage
 
 ![Walkthrough](./assets/Video_Walkthrough.gif)
 
+## Technologies Used
+
+- JavaScript
+- Node.js
+- Inquirer
+- MySQL
+
 ## Installation
 
 Run npm i in your terminal.
