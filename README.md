@@ -18,7 +18,7 @@ Purpose of app is to provide business owners with the ability to view and manage
 
 ## Website in Action
 
-
+![Walkthrough](./assets/Video_Walkthrough.gif)
 
 ## Installation
 
