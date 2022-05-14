@@ -2,7 +2,7 @@
 const inquirer = require('inquirer');
 const mysql = require('mysql');
 const consoleTable = require('console.table');
-const { initialPrompt, addDepartmentPrompt, addRolePrompt, addEmployeePrompt, updateRolePrompt } = require('./helpers/questions');
+const { populateEmployeeArray,populateRoleArray, populateDepartmentArray, initialPrompt, addDepartmentPrompt, addRolePrompt, addEmployeePrompt, updateRolePrompt } = require('./helpers/questions');
 // const { allDepartments, allEmployees, allRoles } = require('./helpers/createArrays');
 
 // Create connection to database using personal log-in info
@@ -80,6 +80,7 @@ const addDepartment = () => {
 };
 
 const addRole = () => {
+  populateDepartmentArray();
   inquirer
     .prompt(addRolePrompt)
     .then((response) => {
@@ -97,7 +98,7 @@ const addRole = () => {
           if (err) {
             console.error(err);
           } else {
-            console.log('\x1b[36m Role successfully added!');
+            console.log('\x1b[36m Role successfully added to the database!');
           }
         })
       })
@@ -106,6 +107,8 @@ const addRole = () => {
 };
 
 const addEmployee = () => {
+  populateEmployeeArray();
+  populateRoleArray();
   inquirer
     .prompt(addEmployeePrompt)
     .then((response) => {
@@ -132,7 +135,7 @@ const addEmployee = () => {
             if (err) {
               console.error(err)
             } else {
-              console.log('\x1b[36m Employee successfully added!');
+              console.log('\x1b[36m Employee successfully added to the database!');
             }
           })
         })
@@ -142,6 +145,8 @@ const addEmployee = () => {
 };
 
 const updateRoles = () => {
+  populateEmployeeArray();
+  populateRoleArray();
   inquirer
     .prompt(updateRolePrompt)
     .then((response) => {
@@ -163,12 +168,12 @@ const updateRoles = () => {
           } else {
             employeeId = results[0].id;
           }
-          // Using department Id and title/salary inputs, insert new role into table
+          // Using employee Id and role Id from above, update targeted employees role
           db.query(`UPDATE employees SET roleId = (?) WHERE id = ${employeeId}`, [roleId], (err, results) => {
             if (err) {
               console.error(err)
             } else {
-              console.log('\x1b[36m Employee successfully added!');
+              console.log('\x1b[36m Employee successfully updated!');
             }
           })
         })
@@ -190,6 +195,7 @@ function init() {
     .then((response => {
       switch (response.prompt) {
         case 'View All Employees':
+          populateEmployeeArray();
           viewEmployees();
           break;
         case 'Add Employee':
@@ -199,12 +205,14 @@ function init() {
           updateRoles();
           break;
         case 'View All Roles':
+          populateRoleArray();
           viewRoles();
           break;
         case 'Add Role':
           addRole();
           break;
         case 'View All Departments':
+          populateDepartmentArray();
           viewDepartments();
           break;
         case 'Add Department':

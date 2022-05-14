@@ -15,32 +15,35 @@ const db = mysql.createConnection(
   },
 );
 
-db.query(`SELECT * FROM departments`, (err, results) => {
+const populateDepartmentArray = () => { db.query(`SELECT * FROM departments`, (err, results) => {
   if (err) {
       console.error(err);
   }        
   for (let department of results) {
       allDepartments.push(department.departmentName);
   }
-});
+})
+};
 
-db.query(`SELECT * FROM roles`, (err, results) => {
+const populateRoleArray = () => {db.query(`SELECT * FROM roles`, (err, results) => {
   if (err) {
       console.error(err);
   }        
   for (let role of results) {
       allRoles.push(role.title);
   }
-});
+})
+};
 
-db.query(`SELECT * FROM employees`, (err, results) => {
+const populateEmployeeArray = () => {db.query(`SELECT * FROM employees`, (err, results) => {
   if (err) {
       console.error(err);
   }        
   for (let employee of results) {
       allEmployees.push(`${employee.firstName} ${employee.lastName}`);
   }
-});
+})
+};
 
 const initialPrompt = [
   {
@@ -59,7 +62,7 @@ const addDepartmentPrompt = [
   }
 ];
 
-const addRolePrompt = [
+var addRolePrompt = [
   {
     type: "input",
     message: "What is the name of the role that you would like to add?",
@@ -78,7 +81,7 @@ const addRolePrompt = [
   }
 ];
 
-const addEmployeePrompt = [
+var addEmployeePrompt = [
   {
     type: "input",
     message: "What is the new employee's first name?",
@@ -103,7 +106,7 @@ const addEmployeePrompt = [
   }
 ];
 
-const updateRolePrompt = [
+var updateRolePrompt = [
   {
     type: "list",
     message: "Which employee's role would you like to update?",
@@ -118,4 +121,4 @@ const updateRolePrompt = [
   }
 ]
 
-module.exports = {initialPrompt, addDepartmentPrompt, addRolePrompt, addEmployeePrompt, updateRolePrompt};
+module.exports = {populateEmployeeArray, populateRoleArray, populateDepartmentArray, initialPrompt, addDepartmentPrompt, addRolePrompt, addEmployeePrompt, updateRolePrompt};
