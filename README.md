@@ -5,6 +5,7 @@
   ## Table of Contents
 - [Description](#description)
 - [Website in Action](#usage)
+- [Technologies Used](#technologies)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
