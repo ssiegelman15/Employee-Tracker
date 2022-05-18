@@ -5,7 +5,7 @@
   ## Table of Contents
 - [Description](#description)
 - [Website in Action](#usage)
-- [Technologies Used](#technologies)
+- [Technologies](#technologies)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
@@ -21,8 +21,7 @@ Purpose of app is to provide business owners with the ability to view and manage
 
 ![Walkthrough](./assets/Video_Walkthrough.gif)
 
-## Technologies Used
-
+## Technologies
 - JavaScript
 - Node.js
 - Inquirer
